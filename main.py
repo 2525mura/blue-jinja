@@ -23,8 +23,17 @@ def peripheral_esp32_server(path: str):
         f.write(rendered)
 
 
+def central_ios_client(path: str):
+    os.makedirs(path, exist_ok=True)
+    with open(f'{path}/BleGattClient.swift', mode='w') as f:
+        template = env.get_template('template/central/ios_client/BleGattClient.swift.jinja')
+        rendered = template.render(client_services_conf=gatt.client_services)
+        f.write(rendered)
+
+
 def main():
     peripheral_esp32_server(path='out_esp32')
+    # central_ios_client(path='out_ios')
 
 
 if __name__ == '__main__':

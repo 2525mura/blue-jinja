@@ -1,5 +1,6 @@
 # GATT Specific setting file
 
+# Basic configuration
 service = {
     'name': 'Expose',
     'uuid': '121e8e18-23c1-0bd5-b6d9-6180dba956bc'
@@ -47,4 +48,10 @@ characteristics = [
         }
     },
 
+]
+
+# For BleGattClient.swift
+client_services = [
+    'Expose',
+    'Battery'
 ]
