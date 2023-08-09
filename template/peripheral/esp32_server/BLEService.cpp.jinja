@@ -25,10 +25,10 @@ BLEService{{ service_conf.name }}::BLEService{{ service_conf.name }}(std::unique
     {%- for characteristic in characteristics_conf -%}
     {%- if characteristic.direction=='CtoP' or characteristic.direction=='BIDI' %}
     cbRecv{{ characteristic.name }}_.setFunc([this](std::string msg) {
-        {%- if characteristic.args.type=='std::string' %}
+        {%- if characteristic.args.type_fixed=='std::string' %}
         delegate_->onRecv{{ characteristic.name }}(msg);
         {%- else %}
-        {{ characteristic.args.type }}* buff = ({{ characteristic.args.type }}*)msg.c_str();
+        {{ characteristic.args.type_fixed }}* buff = ({{ characteristic.args.type_fixed }}*)msg.c_str();
         delegate_->onRecv{{ characteristic.name }}({%- for arg_name in characteristic.args.names -%}
         buff[{{ loop.index-1 }}]{% if not loop.last %}, {% endif %}{% endfor %});
         {%- endif %}
@@ -43,10 +43,10 @@ BLEService{{ service_conf.name }}::BLEService{{ service_conf.name }}(std::unique
 {% for characteristic in characteristics_conf -%}
 {% if characteristic.direction=='PtoC' or characteristic.direction=='BIDI' %}
 void BLEService{{ service_conf.name }}::send{% include 'template/peripheral/c_stub_func.jinja' %} {
-    {% if characteristic.args.type=='std::string' %}
+    {% if characteristic.args.type_fixed=='std::string' %}
     pCharacteristic{{ characteristic.name }}_->setValue({{ characteristic.args.names[0] }});
     {% else %}
-    {{ characteristic.args.type }} buff[{{ characteristic.args.names | length }}];
+    {{ characteristic.args.type_fixed }} buff[{{ characteristic.args.names | length }}];
     {% for arg_name in characteristic.args.names -%}
     buff[{{ loop.index-1 }}] = {{ arg_name }};
     {% endfor %}

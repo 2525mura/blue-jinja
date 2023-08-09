@@ -1,6 +1,7 @@
 import os
 import shutil
 import gatt
+from value_type import Language
 from jinja2 import Template, Environment, FileSystemLoader
 
 env = Environment(loader=FileSystemLoader('.'))
@@ -12,6 +13,7 @@ def copy_common_src(src_path: str, dst_path: str):
 
 
 def peripheral_esp32_server(path: str):
+    gatt.fix_type(language=Language.Cpp)
     os.makedirs(path, exist_ok=True)
     copy_common_src(src_path='template/peripheral/esp32_server/common_src', dst_path=path)
     with open(f'{path}/BleService{gatt.service["name"]}.h', mode='w') as f:
@@ -31,6 +33,7 @@ def peripheral_esp32_server(path: str):
 
 
 def central_ios_client(path: str):
+    gatt.fix_type(language=Language.Swift)
     os.makedirs(path, exist_ok=True)
     copy_common_src(src_path='template/central/ios_client/common_src', dst_path=path)
     with open(f'{path}/BleGattClient.swift', mode='w') as f:

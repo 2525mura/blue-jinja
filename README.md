@@ -59,7 +59,7 @@ Characteristics は配列形式で入力します。
     - uuid: Characteristics UUID を入力
     - direction: スタブ関数呼び出しの方向を設定、表1参照
     - args
-      - type: 引数の型を指定
+      - type: 引数の型を指定 (Enumから選択)
       - size: 引数のバイト数(1 個あたり)を指定
       - names: 引数名をリストで指定
   - 配列要素 2 ・・・
