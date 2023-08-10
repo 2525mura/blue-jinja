@@ -20,12 +20,10 @@ def peripheral_esp32_server(path: str):
         template = env.get_template('template/peripheral/esp32_server/BleService.h.jinja')
         rendered = template.render(service_conf=gatt.service, characteristics_conf=gatt.characteristics)
         f.write(rendered)
-
     with open(f'{path}/BleService{gatt.service["name"]}.cpp', mode='w') as f:
         template = env.get_template('template/peripheral/esp32_server/BleService.cpp.jinja')
         rendered = template.render(service_conf=gatt.service, characteristics_conf=gatt.characteristics)
         f.write(rendered)
-
     with open(f'{path}/BleService{gatt.service["name"]}Delegate.h', mode='w') as f:
         template = env.get_template('template/peripheral/esp32_server/BleServiceDelegate.h.jinja')
         rendered = template.render(service_conf=gatt.service, characteristics_conf=gatt.characteristics)
@@ -39,6 +37,10 @@ def central_ios_client(path: str):
     with open(f'{path}/BleGattClient.swift', mode='w') as f:
         template = env.get_template('template/central/ios_client/BleGattClient.swift.jinja')
         rendered = template.render(client_services_conf=gatt.client_services)
+        f.write(rendered)
+    with open(f'{path}/BleService{gatt.service["name"]}.swift', mode='w') as f:
+        template = env.get_template('template/central/ios_client/BleService.swift.jinja')
+        rendered = template.render(service_conf=gatt.service, characteristics_conf=gatt.characteristics)
         f.write(rendered)
 
 

@@ -225,9 +225,16 @@ extension Data {
     }
 }
 
-extension Int32 {
+extension Array<Int32> {
     var data: Data {
-        var int = self
-        return Data(bytes: &int, count: MemoryLayout<Int32>.size)
+        var array = self
+        return Data(bytes: &array, count: MemoryLayout<Int32>.size * array.count)
+    }
+}
+
+extension Array<Float> {
+    var data: Data {
+        var array = self
+        return Data(bytes: &array, count: MemoryLayout<Float>.size * array.count)
     }
 }

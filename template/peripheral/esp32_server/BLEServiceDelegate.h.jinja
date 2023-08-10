@@ -10,7 +10,7 @@ class BLEService{{ service_conf.name }}Delegate {
 public:
     {% for characteristic in characteristics_conf -%}
     {% if characteristic.direction=='CtoP' or characteristic.direction=='BIDI' -%}
-    virtual void onRecv{% include 'template/peripheral/c_stub_func.jinja' %} = 0;
+    virtual void onRecv{% include 'template/c_stub_func.jinja' %} = 0;
     {% endif %}
     {%- endfor %}
 }; // BLEService{{ service_conf.name }}Delegate

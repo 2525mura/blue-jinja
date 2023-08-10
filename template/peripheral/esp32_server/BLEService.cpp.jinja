@@ -42,7 +42,7 @@ BLEService{{ service_conf.name }}::BLEService{{ service_conf.name }}(std::unique
 #########################################################}
 {% for characteristic in characteristics_conf -%}
 {% if characteristic.direction=='PtoC' or characteristic.direction=='BIDI' %}
-void BLEService{{ service_conf.name }}::send{% include 'template/peripheral/c_stub_func.jinja' %} {
+void BLEService{{ service_conf.name }}::send{% include 'template/c_stub_func.jinja' %} {
     {% if characteristic.args.type_fixed=='std::string' %}
     pCharacteristic{{ characteristic.name }}_->setValue({{ characteristic.args.names[0] }});
     {% else %}

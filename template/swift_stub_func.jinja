@@ -1,0 +1,2 @@
+{{ characteristic.name }}({%- for arg_name in characteristic.args.names -%}
+{{ arg_name }}: {{ characteristic.args.type_fixed }}{% if not loop.last %}, {% endif %}{% endfor %})
