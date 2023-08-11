@@ -84,6 +84,7 @@ class BleService{{ service_conf.name }}: BleGattClientDelegate {
             // Distribute call functions based on characteristic UUID
             switch characteristic.uuid {
             {% for characteristic in characteristics_conf -%}
+            {% if characteristic.direction=='PtoC' or characteristic.direction=='BIDI' -%}
             case BleService{{ service_conf.name }}.characteristic{{ characteristic.name }}Uuid:
                 {%- if characteristic.args.type_fixed=='String' %}
                 recvDelegate.onRecv{{ characteristic.name }}({{ characteristic.args.names[0] }}: String(data: data, encoding: .ascii)!);
@@ -93,6 +94,7 @@ class BleService{{ service_conf.name }}: BleGattClientDelegate {
                 {{ arg_name }}: buff[{{ loop.index-1 }}]{% if not loop.last %}, {% endif %}{% endfor %})
                 {%- endif %}
                 break
+            {% endif -%}
             {% endfor -%}
             default:
                 break

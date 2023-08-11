@@ -74,3 +74,19 @@ Characteristics は配列形式で入力します。
 
 > **Note**
 > 仕様上、複数 Service をまとめてコード生成することはできません。複数 Service ある場合は、1 Service ずつ作成してください。
+
+## Jinjaテンプレート文法メモ
+
+### Whitespace Control
+
+```
+{%- for %} for文宣言前の改行を削除
+{% for -%} ループごとの先頭の改行を無効
+{%- endfor %} ループ最終行の改行を削除
+{% endfor -%} endfor文宣言行の改行と以降のインデントを削除
+
+{%- if %} if文宣言前の改行を削除
+{% if -%} if文先頭の改行を無効(判定True直後)
+{%- endif %} if最終行の改行を削除
+{% endif -%} endif文宣言行の改行と以降のインデントを削除
+```

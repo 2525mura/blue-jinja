@@ -42,6 +42,10 @@ def central_ios_client(path: str):
         template = env.get_template('template/central/ios_client/BleService.swift.jinja')
         rendered = template.render(service_conf=gatt.service, characteristics_conf=gatt.characteristics)
         f.write(rendered)
+    with open(f'{path}/BleService{gatt.service["name"]}Delegate.swift', mode='w') as f:
+        template = env.get_template('template/central/ios_client/BleServiceDelegate.swift.jinja')
+        rendered = template.render(service_conf=gatt.service, characteristics_conf=gatt.characteristics)
+        f.write(rendered)
 
 
 def main():

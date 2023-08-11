@@ -69,7 +69,7 @@ def type_swift():
         if characteristic['args']['type'] == ValueType.Int:
             characteristic['args']['type_fixed'] = 'Int32'
         elif characteristic['args']['type'] == ValueType.Float:
-            characteristic['args']['type_fixed'] = 'Float32'
+            characteristic['args']['type_fixed'] = 'Float'
         elif characteristic['args']['type'] == ValueType.String:
             characteristic['args']['type_fixed'] = 'String'
 
